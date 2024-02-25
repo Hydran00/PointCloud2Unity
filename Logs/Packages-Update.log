@@ -45,3 +45,13 @@ The following packages were added:
   com.unity.timeline@1.6.5
   com.unity.ugui@1.0.0
   com.unity.visualscripting@1.9.1
+
+=== Sun Feb 25 21:42:19 2024
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were added:
+  com.unity.ai.navigation@1.1.5
+The following packages were updated:
+  com.unity.timeline from version 1.6.5 to 1.7.6

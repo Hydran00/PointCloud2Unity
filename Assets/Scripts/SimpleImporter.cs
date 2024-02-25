@@ -72,7 +72,7 @@ namespace PointCloudExporter
 							if (index < vertexCount) {
 
 								data.vertices[index] = new Vector3(-reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
-                                if (false)// (normalDataCount == 3 )
+                                if (normalDataCount == 3 )
                                 {
                                     data.normals[index] = new Vector3(-reader.ReadSingle(), reader.ReadSingle(), reader.ReadSingle());
                                 } else {
