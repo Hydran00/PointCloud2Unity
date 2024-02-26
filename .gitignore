@@ -4,6 +4,8 @@
 /[Bb]uild/
 /[Bb]uilds/
 /Assets/AssetStoreTools*
+/Logs/
+/Temp/
 
 # They also could contain extremely sensitive data
 /[Mm]emoryCaptures/
