@@ -21,7 +21,7 @@ A Unity package for reading and visualizing PointCloud2 data coming from ROS2 th
 
 ## Tips for improving performances
 - Use GPU instancing for rendering the pointcloud. This will allow you to render thousands of points with a single draw call.
-- Preprocess the pointcloud filtering some points. An simple example with segmentation + voxel grid is provided [here](git@github.com:Hydran00/PC2-Filter-ROS2.git) 
+- Preprocess the pointcloud filtering some points. An simple example with segmentation + voxel grid is provided [here](https://github.com/Hydran00/PC2-Filter-ROS2).
 
 
 ## References
