@@ -12,6 +12,7 @@ using System.Threading;
 using MeshBuffer;
 public class PC2SingleMesh : MonoBehaviour
 {
+    public int verticesMax = 200000;
     public bool UseNormals = false;
 
     public float PointSize = 0.1f;
@@ -22,7 +23,7 @@ public class PC2SingleMesh : MonoBehaviour
     [Header("MAKE SURE THESE LISTS ARE MINIMISED OR EDITOR WILL CRASH")]
 
     bool isMessageReceived = false;
-    public int verticesMax = 65535;
+    // maximum number of vertices drawable per mesh
 
     private Mesh mesh;
     private MeshInfos mesh_infos;
@@ -57,7 +58,11 @@ public class PC2SingleMesh : MonoBehaviour
         ros = ROSConnection.GetOrCreateInstance();
         ros.Subscribe<PointCloud2Msg>(topicName, StorePointCloud);
         mesh_infos = new MeshInfos();
-        mesh = new Mesh();
+        mesh = new Mesh{
+            // allow more than 65535 vertices
+            indexFormat = UnityEngine.Rendering.IndexFormat.UInt32
+        };
+        
         if (UseNormals == false)
         {
             RGB_OFFSET = 16;
@@ -87,6 +92,7 @@ public class PC2SingleMesh : MonoBehaviour
         size = row_step * height;
         point_step = (int)message.point_step;
         size = size / point_step;
+        size = Mathf.Min(size, verticesMax);
         isMessageReceived = true;
     }
     void ParsePointCloud()
@@ -149,21 +155,10 @@ public class PC2SingleMesh : MonoBehaviour
     {
 
         int vertexCount = mesh_infos.vertexCount;
-        int meshCount = (int)Mathf.Ceil(vertexCount / (float)verticesMax);
-        int meshIndex = 0;
         int vertexIndex = 0;
         int resolution = GetNearestPowerOfTwo(Mathf.Sqrt(vertexCount));
-        int count = verticesMax;
-        if (vertexCount <= verticesMax)
-        {
-            count = vertexCount;
-        }
-        else if (vertexCount > verticesMax && meshCount == meshIndex + 1)
-        {
-            count = vertexCount % verticesMax;
-        }
-        int[] subIndices = new int[count];
-        for (int i = 0; i < count; ++i)
+        int[] subIndices = new int[size];
+        for (int i = 0; i < size; ++i)
         {
             subIndices[i] = i;
         }

@@ -13,13 +13,12 @@ using MeshBuffer;
 public class PC2ComputeBuffer : MonoBehaviour
 {
 
-    public int verticesMax = 65535;
+    private const int verticesMax = 65535;
     public Material material;
 
     public Camera CurrentCamera;
     public bool UseNormals = true;
     public Mesh pointMesh;
-    // public Camera CurrentCamera;
     public bool faceCamera = true;
     public float normalOffset = 0f;
     [Range(0f, 0.08f)]

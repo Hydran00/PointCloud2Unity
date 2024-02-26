@@ -3,12 +3,59 @@ A Unity package containing different possible implementations for visualizing th
 
 
 ### Proposed methods:
-1. Creating a single mesh with all the points. Then points will render a triangle or a sphere using the geometry shader.
-2. Exploit GPU Instancing and render directly each points as a single mesh (quad, cube, sphere).
-3. Variant of method 2 in which ComputeBuffers are used to store the data and then render the points.
+1. Creating a single mesh with all the points. Then each point will render a triangle or a disc using the geometry shader.³
+2. Exploit GPU Instancing and render directly each points as a single mesh (quad, cube, sphere, ...).²
+3. Variant of method 2 in which `ComputeBuffers` are used to store the data and then render the points.²
 
 Each methods uses a particular shader which is located in the same folder of the script.
 
+## Method 1
+This method creates a single mesh with all the points. Then points will render a triangle or a sphere using the geometry shader.
+This approach seems to be the most performant, but does not have the possibility to draw quads, cubes or other shapes. The material is inherited from the `PCL` GameObject, so it is possible to switch from points to triangles and viceversa changing the material from the inspector with the ones provided in the same folder of the script.
+
+### Preview
+<table>
+    <tr>
+        <td> <b>Points</b> </td>
+        <td> <b>Triangles</b> </td>
+    </tr>
+        <td> <img src="imgs/points1.png" alt="Drawing points" style="width: 250px;"/> </td>
+        <td> <img src="imgs/triangles1.png" alt="Drawing triangles" style="width: 250px;"/> </td>
+    <tr>
+    <td> <b>Larger Points</b> </td>
+    <td> <b>Larger Triangles</b> </td>
+    </tr>
+        <td> <img src="imgs/points2.png" alt="Changing size" style="width: 250px;"/> </td>
+        <td> <img src="imgs/triangles2.png" alt="Changing size" style="width: 250px;"/> </td>
+    <tr>
+</table>
+
+
+
+## Methods 2 and 3
+These approaches exploit GPUs parallelism to render each point as a single mesh (quad, cube, sphere, ...). This is done using the `Graphics.RenderMeshInstanced` function.  `MaterialPropertyBlock` is also used to set different parameters value in the shaders. The material must be provided as argument in the inspector tab of the script. 
+For `Method 2` the material is called `PC2GPUMaterial`, for `Method 3` the material is called `BufferedMaterial`.
+### Preview
+You can modify the scale of the meshes used to represent each points from the Inspector.
+<table>
+    <tr>
+        <td> <b>Quads</b> </td>
+        <td> <b>Cubes</b> </td>
+        <td> <b>Spheres</b> </td>
+    </tr>
+        <td> <img src="imgs/quads.png" alt="Drawing quads" style="width: 250px;"/> </td>
+        <td> <img src="imgs/cubes.png" alt="Drawing cubes" style="width: 250px;"/> </td>
+        <td> <img src="imgs/spheres.png" alt="Drawing spheres" style="width: 250px;"/> </td>
+    <tr>
+    <td> <b> Larger Quads</b> </td>
+    <td> <b> Larger Cubes</b> </td>
+    <td> <b> Larger Spheres</b> </td>
+    </tr>
+        <td> <img src="imgs/size1.png" alt="Changing size" style="width: 250px;"/> </td>
+        <td> <img src="imgs/size2.png" alt="Changing size" style="width: 250px;"/> </td>
+        <td> <img src="imgs/size3.png" alt="Changing size" style="width: 250px;"/> </td>
+    <tr>
+</table>
 
 ## How to use it:
 ### ROS Users:
@@ -31,53 +78,26 @@ Each methods uses a particular shader which is located in the same folder of the
 ### Non-ROS Users:
 In this case you have to write your own code to fill the MeshInfo struct with the data you want to visualize. You can then use the functions 
 implemented in this package.
+
+
 ## Common Parameters
 The three methods share some common parameters:
 - Vertices Max: The maximum number of vertices that will be extracted from the pointcloud for visualization.
 - Topic Name: The name of the topic you want to visualize.
 - Use Normals: If the pointcloud contains normals, this will modify the offsets of the data in the pointcloud decoder algorithm.
+- Point size: The size of the verteces/meshes (works in real time)
 Normals are also used in Method 1 to rotate triangles towards the camera.
 
 
-## Method 1
-This method creates a single mesh with all the points. Then points will render a triangle or a sphere using the geometry shader.
-This method seems to be the most performant.
-
-
-
-
-
-## Preview
-You can modify the size of the points and the mesh used to represent them.
-<table>
-    <tr>
-        <td> <b>Quads</b> </td>
-        <td> <b>Cubes</b> </td>
-        <td> <b>Spheres</b> </td>
-    </tr>
-        <td> <img src="imgs/quad.png" alt="Drawing quads" style="width: 250px;"/> </td>
-        <td> <img src="imgs/cubes.png" alt="Drawing cubes" style="width: 250px;"/> </td>
-        <td> <img src="imgs/spheres.png" alt="Drawing spheres" style="width: 250px;"/> </td>
-    <tr>
-    <td> <b>Changing size</b> </td>
-    </tr>
-        <td> <img src="imgs/size1.png" alt="Changing size" style="width: 250px;"/> </td>
-        <td> <img src="imgs/size2.png" alt="Changing size" style="width: 250px;"/> </td>
-        <td> <img src="imgs/size3.png" alt="Changing size" style="width: 250px;"/> </td>
-    <tr>
-</table>
-
-
 ## Tips for improving performances
-- Use GPU instancing for rendering the pointcloud. This will allow you to render thousands of points with a single draw call.
 - Preprocess the pointcloud filtering some points. An simple example with segmentation + voxel grid is provided [here](https://github.com/Hydran00/PC2-Filter-ROS2).
 
 
 
 ## References
 For this project I took inspiration from the following repositories/websites:  
-- [Pcx](https://github.com/keijiro/Pcx)
-- [GPU Instancing tutorial](https://toqoz.fyi/thousands-of-meshes.html)
-- [PointCloud Processing tutorial](https://sketchfab.com/blogs/community/tutorial-processing-point-cloud-data-unity/)
-- [PointCloud Streaming](https://github.com/inmo-jang/unity_assets/tree/master/PointCloudStreaming)
-- [Vertex Point Cloud](https://github.com/keenanwoodall/VertexPointCloud/tree/master)
+1. [Pcx](https://github.com/keijiro/Pcx)
+2. [GPU Instancing tutorial](https://toqoz.fyi/thousands-of-meshes.html)
+3. [PointCloud Processing tutorial](https://sketchfab.com/blogs/community/tutorial-processing-point-cloud-data-unity/)
+4. [PointCloud Streaming](https://github.com/inmo-jang/unity_assets/tree/master/PointCloudStreaming)
+5. [Vertex Point Cloud](https://github.com/keenanwoodall/VertexPointCloud/tree/master)
