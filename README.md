@@ -18,6 +18,12 @@ A Unity package for reading and visualizing PointCloud2 data coming from ROS2 th
     - Define <b>offsets</b> for position and rotation if you need to.
     - Set the <b>topic name</b> of the PointCloud2 message you want to visualize.
 6. Run the scene and you should see the pointcloud being visualized in Unity.
+
+## Tips for improving performances
+- Use GPU instancing for rendering the pointcloud. This will allow you to render thousands of points with a single draw call.
+- Preprocess the pointcloud filtering some points. An simple example with segmentation + voxel grid is provided [here](git@github.com:Hydran00/PC2-Filter-ROS2.git) 
+
+
 ## References
 For this project I took inspiration from the following repositories/websites:  
 - [Pcx](https://github.com/keijiro/Pcx)

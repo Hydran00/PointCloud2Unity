@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PointCloudExporter
+namespace MeshBuffer
 {
 	public class MeshInfos
 	{

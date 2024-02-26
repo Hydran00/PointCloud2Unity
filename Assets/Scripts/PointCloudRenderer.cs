@@ -9,10 +9,7 @@ using Unity.Robotics.ROSTCPConnector.ROSGeometry;
 using RosMessageTypes.Std;
 using UnityEngine.UI;
 using System.Threading;
-using PointCloudExporter;
-
-using PC2;
-// using PointCloudExporter;
+using MeshBuffer;
 public class PointCloudRenderer : MonoBehaviour
 {
     public bool UseNormals = true;
@@ -272,47 +269,49 @@ void GenerateGPUInstanced()
     }
 }
 
-    public void Generate(MeshInfos meshInfos, MeshTopology topology)
-    {
+// OLD WAY -> Use it if the other one doesn't work (need to use a shader that supports _Size
+// like PointCloud in test/)
+//     public void Generate(MeshInfos meshInfos, MeshTopology topology)
+//     {
 
-        int vertexCount = meshInfos.vertexCount;
-        int meshCount = (int)Mathf.Ceil(vertexCount / (float)verticesMax);
-        int meshIndex = 0;
-        int vertexIndex = 0;
-        int resolution = GetNearestPowerOfTwo(Mathf.Sqrt(vertexCount));
-        int count = verticesMax;
-        if (vertexCount <= verticesMax)
-        {
-            count = vertexCount;
-        }
-        else if (vertexCount > verticesMax && meshCount == meshIndex + 1)
-        {
-            count = vertexCount % verticesMax;
-        }
-        int[] subIndices = new int[count];
-        for (int i = 0; i < count; ++i)
-        {
-            subIndices[i] = i;
-        }
-        mesh.Clear();
-        mesh.vertices = meshInfos.vertices;
-        mesh.normals = meshInfos.normals;
-        mesh.colors = meshInfos.colors;
-        mesh.bounds = new Bounds(Vector3.zero, Vector3.one * 100f);
-        mesh.SetIndices(subIndices, topology, 0);
-        Vector2[] uvs2 = new Vector2[mesh.vertices.Length];
-        for (int i = 0; i < uvs2.Length; ++i)
-        {
-            float x = vertexIndex % resolution;
-            float y = Mathf.Floor(vertexIndex / (float)resolution);
-            uvs2[i] = new Vector2(x, y) / (float)resolution;
-            ++vertexIndex;
-        }
-        mesh.uv2 = uvs2;
+//         int vertexCount = meshInfos.vertexCount;
+//         int meshCount = (int)Mathf.Ceil(vertexCount / (float)verticesMax);
+//         int meshIndex = 0;
+//         int vertexIndex = 0;
+//         int resolution = GetNearestPowerOfTwo(Mathf.Sqrt(vertexCount));
+//         int count = verticesMax;
+//         if (vertexCount <= verticesMax)
+//         {
+//             count = vertexCount;
+//         }
+//         else if (vertexCount > verticesMax && meshCount == meshIndex + 1)
+//         {
+//             count = vertexCount % verticesMax;
+//         }
+//         int[] subIndices = new int[count];
+//         for (int i = 0; i < count; ++i)
+//         {
+//             subIndices[i] = i;
+//         }
+//         mesh.Clear();
+//         mesh.vertices = meshInfos.vertices;
+//         mesh.normals = meshInfos.normals;
+//         mesh.colors = meshInfos.colors;
+//         mesh.bounds = new Bounds(Vector3.zero, Vector3.one * 100f);
+//         mesh.SetIndices(subIndices, topology, 0);
+//         Vector2[] uvs2 = new Vector2[mesh.vertices.Length];
+//         for (int i = 0; i < uvs2.Length; ++i)
+//         {
+//             float x = vertexIndex % resolution;
+//             float y = Mathf.Floor(vertexIndex / (float)resolution);
+//             uvs2[i] = new Vector2(x, y) / (float)resolution;
+//             ++vertexIndex;
+//         }
+//         mesh.uv2 = uvs2;
 
-        PCL.GetComponent<MeshFilter>().mesh = mesh;
-        PCL.GetComponent<MeshRenderer>().material.SetFloat("_Size", TriangleSize);
-    }
+//         PCL.GetComponent<MeshFilter>().mesh = mesh;
+//         PCL.GetComponent<MeshRenderer>().material.SetFloat("_Size", TriangleSize);
+//     }
 }
 
 
