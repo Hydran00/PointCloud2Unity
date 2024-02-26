@@ -51,6 +51,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "PointCloudExporter-master.sln",
+    "dotnet.defaultSolution": "PointCloud2Unity.sln",
     "ros.distro": "humble"
 }
