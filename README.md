@@ -3,9 +3,9 @@ A Unity package containing different possible implementations for visualizing th
 
 
 ### Proposed methods:
-1. Creating a single mesh with all the points. Then each point will render a triangle or a disc using the geometry shader.³
-2. Exploit GPU Instancing and render directly each points as a single mesh (quad, cube, sphere, ...).²
-3. Variant of method 2 in which `ComputeBuffers` are used to store the data and then render the points.²
+1. Creating a single mesh with all the points. Then each point will render a triangle or a disc using the geometry shader. <cite>[4][4]</cite>
+2. Exploit GPU Instancing and render directly each points as a single mesh (quad, cube, sphere, ...). <cite>[2][2]</cite>,<cite>[3][3]</cite>
+3. Variant of method 2 in which `ComputeBuffers` are used to store the data and then render the points. <cite>[2][2]</cite>,<cite>[3][3]</cite>
 
 Each methods uses a particular shader which is located in the same folder of the script.
 
@@ -43,17 +43,17 @@ You can modify the scale of the meshes used to represent each points from the In
         <td> <b>Cubes</b> </td>
         <td> <b>Spheres</b> </td>
     </tr>
-        <td> <img src="imgs/quads.png" alt="Drawing quads" style="width: 400;"/> </td>
-        <td> <img src="imgs/cubes.png" alt="Drawing cubes" style="width: 400;"/> </td>
-        <td> <img src="imgs/spheres.png" alt="Drawing spheres" style="width: 400;"/> </td>
+        <td> <img src="imgs/quads1.png" alt="Drawing quads" style="width: 400;"/> </td>
+        <td> <img src="imgs/cubes1.png" alt="Drawing cubes" style="width: 400;"/> </td>
+        <td> <img src="imgs/spheres1.png" alt="Drawing spheres" style="width: 400;"/> </td>
     <tr>
     <td> <b> Larger Quads</b> </td>
     <td> <b> Larger Cubes</b> </td>
     <td> <b> Larger Spheres</b> </td>
     </tr>
-        <td> <img src="imgs/size1.png" alt="Changing size" style="width: 400;"/> </td>
-        <td> <img src="imgs/size2.png" alt="Changing size" style="width: 400;"/> </td>
-        <td> <img src="imgs/size3.png" alt="Changing size" style="width: 400;"/> </td>
+        <td> <img src="imgs/quads2.png" alt="Changing size of quads" style="width: 400;"/> </td>
+        <td> <img src="imgs/cubes2.png" alt="Changing size of cubes" style="width: 400;"/> </td>
+        <td> <img src="imgs/spheres2.png" alt="Changing size of spheres" style="width: 400;"/> </td>
     <tr>
 </table>
 
@@ -96,3 +96,9 @@ For this project I took inspiration from the following repositories/websites:
 3. [PointCloud Processing tutorial](https://sketchfab.com/blogs/community/tutorial-processing-point-cloud-data-unity/)
 4. [PointCloud Streaming](https://github.com/inmo-jang/unity_assets/tree/master/PointCloudStreaming)
 5. [Vertex Point Cloud](https://github.com/keenanwoodall/VertexPointCloud/tree/master)
+
+[1]: https://github.com/keijiro/Pcx
+[2]: https://toqoz.fyi/thousands-of-meshes.html
+[3]: https://sketchfab.com/blogs/community/tutorial-processing-point-cloud-data-unity/
+[4]: https://github.com/inmo-jang/unity_assets/tree/master/PointCloudStreaming
+[5]: https://github.com/keenanwoodall/VertexPointCloud/tree/master
