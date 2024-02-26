@@ -19,14 +19,14 @@ This approach seems to be the most performant, but does not have the possibility
         <td> <b>Points</b> </td>
         <td> <b>Triangles</b> </td>
     </tr>
-        <td> <img src="imgs/points1.png" alt="Drawing points" style="width: 250px;"/> </td>
-        <td> <img src="imgs/triangles1.png" alt="Drawing triangles" style="width: 250px;"/> </td>
+        <td> <img src="imgs/points1.png" alt="Drawing points" style="width: 400;"/> </td>
+        <td> <img src="imgs/triangles1.png" alt="Drawing triangles" style="width: 400;"/> </td>
     <tr>
     <td> <b>Larger Points</b> </td>
     <td> <b>Larger Triangles</b> </td>
     </tr>
-        <td> <img src="imgs/points2.png" alt="Changing size" style="width: 250px;"/> </td>
-        <td> <img src="imgs/triangles2.png" alt="Changing size" style="width: 250px;"/> </td>
+        <td> <img src="imgs/points2.png" alt="Changing size" style="width: 400;"/> </td>
+        <td> <img src="imgs/triangles2.png" alt="Changing size" style="width: 400;"/> </td>
     <tr>
 </table>
 
@@ -43,17 +43,17 @@ You can modify the scale of the meshes used to represent each points from the In
         <td> <b>Cubes</b> </td>
         <td> <b>Spheres</b> </td>
     </tr>
-        <td> <img src="imgs/quads.png" alt="Drawing quads" style="width: 250px;"/> </td>
-        <td> <img src="imgs/cubes.png" alt="Drawing cubes" style="width: 250px;"/> </td>
-        <td> <img src="imgs/spheres.png" alt="Drawing spheres" style="width: 250px;"/> </td>
+        <td> <img src="imgs/quads.png" alt="Drawing quads" style="width: 400;"/> </td>
+        <td> <img src="imgs/cubes.png" alt="Drawing cubes" style="width: 400;"/> </td>
+        <td> <img src="imgs/spheres.png" alt="Drawing spheres" style="width: 400;"/> </td>
     <tr>
     <td> <b> Larger Quads</b> </td>
     <td> <b> Larger Cubes</b> </td>
     <td> <b> Larger Spheres</b> </td>
     </tr>
-        <td> <img src="imgs/size1.png" alt="Changing size" style="width: 250px;"/> </td>
-        <td> <img src="imgs/size2.png" alt="Changing size" style="width: 250px;"/> </td>
-        <td> <img src="imgs/size3.png" alt="Changing size" style="width: 250px;"/> </td>
+        <td> <img src="imgs/size1.png" alt="Changing size" style="width: 400;"/> </td>
+        <td> <img src="imgs/size2.png" alt="Changing size" style="width: 400;"/> </td>
+        <td> <img src="imgs/size3.png" alt="Changing size" style="width: 400;"/> </td>
     <tr>
 </table>
 
