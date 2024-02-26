@@ -12,16 +12,17 @@ using System.Threading;
 using MeshBuffer;
 public class PointCloudRenderer : MonoBehaviour
 {
+    public Camera CurrentCamera;
     public bool UseNormals = true;
     public bool GPU_instancing = true;
     public Mesh pointMesh;
     // public Camera CurrentCamera;
-    bool faceCamera = true;
+    public bool faceCamera = true;
     public float normalOffset = 0f;
     [Range(0f, 0.08f)]
     public float globalScale = 0.1f;
     public Vector3 quaternionOffset;
-    Vector3 scale = Vector3.one;
+    public Vector3 scale = Vector3.one;
 
     public Material pointMaterial;
     private List<Matrix4x4> matrices = new List<Matrix4x4>();
@@ -82,12 +83,11 @@ public class PointCloudRenderer : MonoBehaviour
     {
 
         // update every fps interval
-
         if (isMessageReceived)
         {
+            isMessageReceived = false;
             ParsePointCloud();
             UpdateMesh();
-            isMessageReceived = false;
         }
 
     }
@@ -185,14 +185,14 @@ public class PointCloudRenderer : MonoBehaviour
                        transform.rotation * (mesh_infos.normals[i].normalized * normalOffset);
 
         Quaternion rotation = Quaternion.identity;
-        // if (faceCamera)
-        // {
-        //     rotation = Quaternion.LookRotation(CurrentCamera.transform.position - position);
-        // }
-        // else
-        // {
-        //     rotation = transform.rotation * Quaternion.LookRotation(mesh_infos.normals[i]);
-        // }
+        if (faceCamera)
+        {
+            rotation = Quaternion.LookRotation(CurrentCamera.transform.position - position);
+        }
+        else
+        {
+            rotation = transform.rotation * Quaternion.LookRotation(mesh_infos.normals[i]);
+        }
         return Matrix4x4.TRS(position, rotation, scale * globalScale);
     }
 
@@ -239,9 +239,7 @@ void GenerateGPUInstanced()
         // Generate a single chunk of points
         for (int i = startIndex; i < endIndex; i++)
         {
-            matrices.Add(Matrix4x4.TRS(transform.position + transform.rotation * mesh_infos.vertices[i] +
-                                       transform.rotation * (mesh_infos.normals[i].normalized * normalOffset),
-                                       Quaternion.identity, scale * globalScale));
+            matrices.Add(GetPointTransforms(i));
 
             // Set color array in the property block
             // RGBA values are set to the color array which will be used in the instanced shader

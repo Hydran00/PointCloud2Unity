@@ -25,7 +25,7 @@ You can modify the size of the points and the mesh used to represent them.
 1. Install the ROS-TCP-Connector package from [here](https://github.com/Unity-Technologies/ROS-TCP-Connector) and ROS-TCP-Endopoint ros-package from [here](https://github.com/Unity-Technologies/ROS-TCP-Endpoint). You can follow [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/quick_setup.md) guide.
 2. Set up the ROS-TCP-Connector and ROS-TCP-Endpoint to communicate with your ROS2 environment.
 3. Clone this repository and open the project in Unity.
-4. open the `PointCloudVisalizer` scene.  
+4. open the `PointCloudVisualizer` scene.  
 5. Set your topic name and other options in the `Point Cloud Renderer` script inspector:  
     - Activate <b>Use Normals</b> if your PointCloud2 message contains normals.  
     You can check if it does by running:  
