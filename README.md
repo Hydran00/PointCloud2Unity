@@ -63,18 +63,13 @@ You can modify the scale of the meshes used to represent each points from the In
 2. Set up the ROS-TCP-Connector and ROS-TCP-Endpoint to communicate with your ROS2 environment.
 3. Clone this repository and open the project in Unity.
 4. open one of the `Method` scene.  
-5. Set your topic name and other options in the script inspector of the `PCL` object:  
-    - Activate <b>Use Normals</b> if your PointCloud2 message contains normals.  
-    You can check if it does by running:  
+5. Set your topic name and other options in the script inspector of the `PCL` object.
+6. Activate <b>Use Normals</b> if your PointCloud2 message contains normals.  
+    (You can check if it does by running:  
         ```ros2 topic echo /your_topic_name```   
-        in your terminal and look for the field `normals_`.  
+        in your terminal and look for the field `normals_`. If it is present, then you can activate the option.)
      This will modify offsets of data in the pointcloud decoder.  
-    - Enable <b>GPU instancing</b> for high performance (suggested).  
-    - Set your favourite  <b>mesh for each point</b> in the `Point Mesh' field.  
-    - Set the <b>scale</b> of each mesh point.
-    - Define <b>offsets</b> for position and rotation if you need to.
-    - Set the <b>topic name</b> of the PointCloud2 message you want to visualize.
-6. Run the scene and you should see the pointcloud being visualized in Unity.
+7. Run the scene and you should see the pointcloud being visualized in Unity.
 ### Non-ROS Users:
 In this case you have to write your own code to fill the MeshInfo struct with the data you want to visualize. You can then use the functions 
 implemented in this package.
