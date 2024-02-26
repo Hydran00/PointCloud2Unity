@@ -1,4 +1,4 @@
-﻿Shader "Unlit/PointCloud"
+﻿Shader "Unlit/TriangleMeshShader"
 {
 	Properties
 	{

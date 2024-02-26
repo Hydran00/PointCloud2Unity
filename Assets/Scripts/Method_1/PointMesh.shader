@@ -1,8 +1,8 @@
-﻿Shader "Custom/PointCloudShader"
+﻿Shader "Custom/PointMeshShader"
 {
 	Properties
 	{
-		_PointSize("PointSize", Float) = 1
+		_Size("_Size", Float) = 1
 	}
 
 	SubShader
@@ -36,7 +36,7 @@
 				//
 			};
 
-			float _PointSize;
+			float _Size;
 
 			VertexOutput vert(VertexInput v)
 			{
@@ -49,7 +49,7 @@
 				//
 
 				o.pos = UnityObjectToClipPos(v.v);
-				o.size = _PointSize;
+				o.size = _Size;
 				o.col = v.color;
 
 				return o;
