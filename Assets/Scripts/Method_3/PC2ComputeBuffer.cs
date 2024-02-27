@@ -42,8 +42,8 @@ public class PC2ComputeBuffer : MonoBehaviour
                 sizeof(float) * 4;      // color;
         }
     }
-    void Start(){}
-    
+    void Start() { }
+
     void Update()
     {
         if (PC2Decoder.isMessageReceived)
@@ -76,36 +76,35 @@ public class PC2ComputeBuffer : MonoBehaviour
         for (int i = 0; i < PC2Decoder.mesh_infos.vertexCount; i++)
         {
             MeshProperties props = new MeshProperties();
-
             props.mat = GetPointTransforms(i);
-            props.color = new Color(PC2Decoder.mesh_infos.colors[i].r, PC2Decoder.mesh_infos.colors[i].g, 
-            PC2Decoder.mesh_infos.colors[i].b, 1);
+            
+            props.color = new Color(PC2Decoder.mesh_infos.colors[i].r, PC2Decoder.mesh_infos.colors[i].g, PC2Decoder.mesh_infos.colors[i].b, 1);
 
-            properties[i] = props;
-        }
+        properties[i] = props;
+    }
 
-        meshPropertiesBuffer = new ComputeBuffer(PC2Decoder.mesh_infos.vertexCount, MeshProperties.Size());
-        meshPropertiesBuffer.SetData(properties);
+    meshPropertiesBuffer = new ComputeBuffer(PC2Decoder.mesh_infos.vertexCount, MeshProperties.Size());
+    meshPropertiesBuffer.SetData(properties);
         material.SetBuffer("_Properties", meshPropertiesBuffer);
     }
 
 
-    Matrix4x4 GetPointTransforms(int i)
-    {
-        Vector3 position = transform.position + transform.rotation * PC2Decoder.mesh_infos.vertices[i] +
-                       transform.rotation * (PC2Decoder.mesh_infos.normals[i].normalized * normalOffset);
+Matrix4x4 GetPointTransforms(int i)
+{
+    Vector3 position = transform.position + transform.rotation * PC2Decoder.mesh_infos.vertices[i] +
+                   transform.rotation * (PC2Decoder.mesh_infos.normals[i].normalized * normalOffset);
 
-        Quaternion rotation = Quaternion.identity;
-        if (faceCamera)
-        {
-            rotation = Quaternion.LookRotation(CurrentCamera.transform.position - position);
-        }
-        else
-        {
-            rotation = transform.rotation * Quaternion.LookRotation(PC2Decoder.mesh_infos.normals[i]);
-        }
-        return Matrix4x4.TRS(position, rotation, PointMeshScale * globalScale);
+    Quaternion rotation = Quaternion.identity;
+    if (faceCamera)
+    {
+        rotation = Quaternion.LookRotation(CurrentCamera.transform.position - position);
     }
+    else
+    {
+        rotation = transform.rotation * Quaternion.LookRotation(PC2Decoder.mesh_infos.normals[i]);
+    }
+    return Matrix4x4.TRS(position, rotation, PointMeshScale * globalScale);
+}
 }
 
 

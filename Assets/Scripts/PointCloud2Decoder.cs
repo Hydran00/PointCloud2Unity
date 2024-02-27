@@ -97,7 +97,7 @@ public class PointCloud2Decoder : MonoBehaviour
         float r;
         float g;
         float b;
-        for (int n = 0; n < size - 1; n++)
+        for (int n = 0; n < size; n++)
         {
             x_posi = n * point_step + 0;
             y_posi = n * point_step + 4;
