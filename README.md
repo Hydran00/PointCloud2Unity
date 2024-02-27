@@ -59,7 +59,21 @@ You can modify the scale of the meshes used to represent each points from the In
 </table>
 
 ## Method 4
-This methods exploits the Unity Particle System to render the pointcloud. It is the most efficient way to render a point cloud in Unity given its good integration and parallelization. The only drawback is that you might need to switch from URP to HDRP. For this purpose the implementation is in the branch `HDRP` since HDRP is incompatible with the materials of the other methods.
+This methods exploits the Unity Particle System to render the pointcloud. It is the most efficient way to render a point cloud in Unity given its good integration and parallelization. The only drawback is that you might need to switch from URP to HDRP. For this purpose the implementation is in the `branch HDRP` since HDRP is incompatible with the materials of the other methods. Different shapes can be used to represent the points. It is sufficient to acces the `ShadersGraph` asset and connect the `Initialize Particle` node to a new node like `Output Particle Point` or `Output Particle Triangle` or the shape you want to use.  
+
+### Preview
+<table>
+    <tr>
+        <td> <b>Small Particles</b> </td>
+        <td> <b>Medium Particles</b> </td>
+        <td> <b>Big Particles</b> </td>
+    </tr>
+        <td> <img src="imgs/particles1.png" alt="Drawing particles" style="width: 400;"/> </td>
+        <td> <img src="imgs/particles2.png" alt="Drawing particles" style="width: 400;"/> </td>
+        <td> <img src="imgs/particles3.png" alt="Drawing particles" style="width: 400;"/> </td>
+    <tr>
+</table>
+
 ## How to use it:
 ### ROS Users:
 1. Install the ROS-TCP-Connector package from [here](https://github.com/Unity-Technologies/ROS-TCP-Connector) and ROS-TCP-Endopoint ros-package from [here](https://github.com/Unity-Technologies/ROS-TCP-Endpoint). You can follow [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/quick_setup.md) guide.
