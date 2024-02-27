@@ -5,14 +5,14 @@ using UnityEngine.VFX;
 
 public class ParticlesGenerator : MonoBehaviour
 {
-    Texture2D texColor;
-    Texture2D texPosScale;
-    VisualEffect vfx;
+    private Texture2D texColor;
+    private Texture2D texPosScale;
+    private VisualEffect vfx;
     uint resolution = 1024;
 
     // range
-    [Range(0.01f, 0.5f)]
-    public float particleSize = 0.1f;
+    [Range(0.001f, 0.5f)]
+    public float particleSize = 0.01f;
     bool toUpdate = true;
     public PointCloud2Decoder PC2Decoder;
     uint particleCount;
@@ -20,23 +20,12 @@ public class ParticlesGenerator : MonoBehaviour
     private void Start()
     {
         vfx = GetComponent<VisualEffect>();
-        // Vector3[] vector3 = new Vector3[particleCount];
-        // Color[] colors = new Color[particleCount];
-
-        // for (int i = 0; i < particleCount; i++)
-        // {
-        //     vector3[i] = new Vector3(Random.value * 10, Random.value * 10, Random.value * 10);
-        //     colors[i] = new Color(Random.value, Random.value, Random.value);
-        // }
-
-
     }
 
     private void Update()
     {
         if (PC2Decoder.isMessageReceived)
         {
-            Debug.Log("Message Received");
             PC2Decoder.isMessageReceived = false;
             PC2Decoder.ParsePointCloud();
             SetParticles();
@@ -53,9 +42,9 @@ public class ParticlesGenerator : MonoBehaviour
     }
     public void SetParticles()
     {
-        particleCount = (uint)PC2Decoder.mesh_infos.vertexCount;
         var positions = PC2Decoder.mesh_infos.vertices;
         var colors = PC2Decoder.mesh_infos.colors;
+        particleCount = (uint)PC2Decoder.mesh_infos.vertexCount;
 
         texColor = new Texture2D(positions.Length > (int)resolution ? (int)resolution : positions.Length, Mathf.Clamp(positions.Length / (int)resolution, 1, (int)resolution), TextureFormat.RGBAFloat, false);
         texPosScale = new Texture2D(positions.Length > (int)resolution ? (int)resolution : positions.Length, Mathf.Clamp(positions.Length / (int)resolution, 1, (int)resolution), TextureFormat.RGBAFloat, false);
@@ -72,10 +61,7 @@ public class ParticlesGenerator : MonoBehaviour
                 texPosScale.SetPixel(x, y, data);
             }
         }
-
         texColor.Apply();
         texPosScale.Apply();
-        particleCount = (uint)positions.Length;
-        toUpdate = true;
     }
 }

@@ -1,17 +1,18 @@
 # PointCloud2Unity
-A Unity package containing different possible implementations for visualizing the PointCloud2 data coming from ROS2 through the TCP-Connector.
+A Unity package containing a collection of possible implementations for visualizing point clouds. This package contains also a script to decode the PointCloud2 message coming from ROS/ROS2.
 
 
 ### Proposed methods:
 1. Creating a single mesh with all the points. Then each point will render a triangle or a disc using the geometry shader. [[1](#references)]
 2. Exploit GPU Instancing and render directly each points as a single mesh (quad, cube, sphere, ...). [[2](#references)]
 3. Variant of method 2 in which `ComputeBuffers` are used to store the data and then render the points.[[2](#references),[3](#references)]
+4. Use of the Unity Particles System. [[6](#references)]
 
 Each methods uses a particular shader which is located in the same folder of the script.
 
 ## Method 1
 This method creates a single mesh with all the points. Then points will render a triangle or a sphere using the geometry shader.
-This approach seems to be the most performant, but does not have the possibility to draw quads, cubes or other shapes. The material is inherited from the `PCL` GameObject, so it is possible to switch from points to triangles and viceversa directly from the inspector. This will cause the material to change from `PointMeshShader` to `TriangleMeshShader` and viceversa.
+This approach seems more performant than Methods 2-3, but does not have the possibility to draw quads, cubes or other shapes. The material is inherited from the `PCL` GameObject, so it is possible to switch from points to triangles and viceversa directly from the inspector. This will cause the material to change from `PointMeshShader` to `TriangleMeshShader` and viceversa.
 
 ### Preview
 <table>
@@ -57,6 +58,8 @@ You can modify the scale of the meshes used to represent each points from the In
     <tr>
 </table>
 
+## Method 4
+This methods exploits the Unity Particle System to render the pointcloud. It is the most efficient way to render a point cloud in Unity given its good integration and parallelization. The only drawback is that you might need to switch from URP to HDRP. For this purpose the implementation is in the branch `HDRP` since HDRP is incompatible with the materials of the other methods.
 ## How to use it:
 ### ROS Users:
 1. Install the ROS-TCP-Connector package from [here](https://github.com/Unity-Technologies/ROS-TCP-Connector) and ROS-TCP-Endopoint ros-package from [here](https://github.com/Unity-Technologies/ROS-TCP-Endpoint). You can follow [this](https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/quick_setup.md) guide.
@@ -96,3 +99,4 @@ For this project I took inspiration from the following repositories/websites:
 [3]: [PointCloud Processing tutorial](https://sketchfab.com/blogs/community/tutorial-processing-point-cloud-data-unity/)  
 [4]: [PointCloud Streaming](https://github.com/inmo-jang/unity_assets/tree/master/PointCloudStreaming)  
 [5]: [Vertex Point Cloud](https://github.com/keenanwoodall/VertexPointCloud/tree/master)  
+[6]: [Unity Particle System tutorial](https://www.youtube.com/watch?v=P5BgrdXis68&t=1s)
