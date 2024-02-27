@@ -11,7 +11,7 @@ Each methods uses a particular shader which is located in the same folder of the
 
 ## Method 1
 This method creates a single mesh with all the points. Then points will render a triangle or a sphere using the geometry shader.
-This approach seems to be the most performant, but does not have the possibility to draw quads, cubes or other shapes. The material is inherited from the `PCL` GameObject, so it is possible to switch from points to triangles and viceversa changing the material from the inspector with the ones provided in the same folder of the script.
+This approach seems to be the most performant, but does not have the possibility to draw quads, cubes or other shapes. The material is inherited from the `PCL` GameObject, so it is possible to switch from points to triangles and viceversa directly from the inspector. This will cause the material to change from `PointMeshShader` to `TriangleMeshShader` and viceversa.
 
 ### Preview
 <table>
@@ -70,9 +70,9 @@ You can modify the scale of the meshes used to represent each points from the In
         in your terminal and look for the field `normals_`. If it is present, then you can activate the option.)
      This will modify offsets of data in the pointcloud decoder.  
 7. Run the scene and you should see the pointcloud being visualized in Unity.
+
 ### Non-ROS Users:
-In this case you have to write your own code to fill the MeshInfo struct with the data you want to visualize. You can then use the functions 
-implemented in this package.
+In this case you have to write your own code to fill the MeshInfo struct. You can look how I decoded the PointCloud2 message in the `PointCloud2Decoder` script for a reference. Then you can pass your Decoder as a parameter to the main script associated to the method you want to use.
 
 
 ## Common Parameters

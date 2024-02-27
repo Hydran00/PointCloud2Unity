@@ -1,4 +1,4 @@
-﻿Shader "Unlit/TriangleMeshShader"
+﻿Shader "Custom/TriangleMeshShader"
 {
 	Properties
 	{
