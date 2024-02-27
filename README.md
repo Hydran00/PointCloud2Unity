@@ -3,9 +3,9 @@ A Unity package containing different possible implementations for visualizing th
 
 
 ### Proposed methods:
-1. Creating a single mesh with all the points. Then each point will render a triangle or a disc using the geometry shader. <cite>[4][4]</cite>
-2. Exploit GPU Instancing and render directly each points as a single mesh (quad, cube, sphere, ...). <cite>[2][2]</cite>,<cite>[3][3]</cite>
-3. Variant of method 2 in which `ComputeBuffers` are used to store the data and then render the points. <cite>[2][2]</cite>,<cite>[3][3]</cite>
+1. Creating a single mesh with all the points. Then each point will render a triangle or a disc using the geometry shader. [[1](#references)]
+2. Exploit GPU Instancing and render directly each points as a single mesh (quad, cube, sphere, ...). [[2](#references)]
+3. Variant of method 2 in which `ComputeBuffers` are used to store the data and then render the points.[[2](#references),[3](#references)]
 
 Each methods uses a particular shader which is located in the same folder of the script.
 
@@ -91,14 +91,8 @@ Normals are also used in Method 1 to rotate triangles towards the camera.
 
 ## References
 For this project I took inspiration from the following repositories/websites:  
-1. [Pcx](https://github.com/keijiro/Pcx)
-2. [GPU Instancing tutorial](https://toqoz.fyi/thousands-of-meshes.html)
-3. [PointCloud Processing tutorial](https://sketchfab.com/blogs/community/tutorial-processing-point-cloud-data-unity/)
-4. [PointCloud Streaming](https://github.com/inmo-jang/unity_assets/tree/master/PointCloudStreaming)
-5. [Vertex Point Cloud](https://github.com/keenanwoodall/VertexPointCloud/tree/master)
-
-[1]: https://github.com/keijiro/Pcx
-[2]: https://toqoz.fyi/thousands-of-meshes.html
-[3]: https://sketchfab.com/blogs/community/tutorial-processing-point-cloud-data-unity/
-[4]: https://github.com/inmo-jang/unity_assets/tree/master/PointCloudStreaming
-[5]: https://github.com/keenanwoodall/VertexPointCloud/tree/master
+[1]: [Pcx](https://github.com/keijiro/Pcx)  
+[2]: [GPU Instancing tutorial](https://toqoz.fyi/thousands-of-meshes.html)  
+[3]: [PointCloud Processing tutorial](https://sketchfab.com/blogs/community/tutorial-processing-point-cloud-data-unity/)  
+[4]: [PointCloud Streaming](https://github.com/inmo-jang/unity_assets/tree/master/PointCloudStreaming)  
+[5]: [Vertex Point Cloud](https://github.com/keenanwoodall/VertexPointCloud/tree/master)  
